@@ -66,7 +66,7 @@ function getEmitter() {
         off: function (event, context) {
             for (let ev in events) {
                 if (ev === event || ev.startsWith(event + '.')) {
-                    events[event] = events[event].filter(a => a.context !== context);
+                    events[ev] = events[event].filter(a => a.context !== context);
                 }
             }
 
@@ -82,7 +82,7 @@ function getEmitter() {
             let eventsList = getListOfEvents(event);
             for (let i = 0; i < eventsList.length; i++) {
                 let ev = eventsList[i];
-                if (events[ev]) {
+                if (events.hasOwnProperty(ev)) {
                     executeAllHandlers(events[ev]);
                 }
             }
